@@ -38,6 +38,7 @@ public class Car {
     @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
     private ExtraFeatures extraFeatures;
 
+
     public Car(){
 
     }
@@ -136,5 +137,14 @@ public class Car {
     public void setAvailabilityStatus(boolean availabilityStatus) {
         this.availabilityStatus = availabilityStatus;
     }
+
+    public ExtraFeatures getExtraFeatures() {
+        return extraFeatures;
+    }
+
+    public void setExtraFeatures(ExtraFeatures extraFeatures) {
+        this.extraFeatures = extraFeatures;
+    }
+
 }
 
