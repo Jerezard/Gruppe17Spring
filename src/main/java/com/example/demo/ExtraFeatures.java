@@ -11,8 +11,8 @@ public class ExtraFeatures {
     private int extraFeatureID;
     @Column(name = "extra_feature")
     private String extraFeature;
-    //@ManyToOne
-    //@JoinColumn(name = "car_id")
+    @OneToOne
+    @JoinColumn(name = "car_id")
     private Car car;
 
     public ExtraFeatures(){

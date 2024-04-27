@@ -28,13 +28,16 @@ public class Car {
     @Column(name = "availability_Status")
     private boolean availabilityStatus;
 
-    @ManyToMany
-    @JoinTable(
-        name = "car_extra_features",
-        joinColumns = @JoinColumn(name = "car_id"),
-        inverseJoinColumns = @JoinColumn(name = "extra_feature_id")
-    )
-    private Set<ExtraFeatures> extraFeatures;
+    // @OneToMany
+    // @JoinTable(
+    //     name = "car_extra_features",
+    //     joinColumns = @JoinColumn(name = "car_id"),
+    //     inverseJoinColumns = @JoinColumn(name = "extra_feature_id")
+    // )
+    // private Set<ExtraFeatures> extraFeatures;
+
+    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
+    private ExtraFeatures extraFeatures;
 
     public Car(){
 
