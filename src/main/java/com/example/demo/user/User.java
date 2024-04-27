@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.user;
 import jakarta.persistence.*;
 
 @Entity
@@ -6,7 +6,8 @@ public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerID;
+    @Column(name = "user_id")
+    private int userID;
 
     private String firstName;
     private String lastName;
@@ -14,7 +15,7 @@ public class User {
     private String phoneNumber;
     private boolean isAdmin;
 
-    private User(){
+    public User(){
 
     }
 
@@ -28,12 +29,12 @@ public class User {
 
     }
 
-    public int getCustomerID() {
-        return customerID;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getFirstName() {

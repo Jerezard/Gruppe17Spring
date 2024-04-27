@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.car;
 
 import jakarta.persistence.*;
 
@@ -19,18 +19,18 @@ public class ExtraFeatures {
 
     }
     
-    public ExtraFeatures(int extraFeatureID, String extraFeature){
+    public ExtraFeatures(int extraFeatureID, String extraFeature) {
 
         this.extraFeatureID = extraFeatureID;
         this.extraFeature = extraFeature;
 
     }
 
-    public int getFeatureID() {
+    public int getExtraFeatureID() {
         return extraFeatureID;
     }
 
-    public void setFeatureID(int extraFeatureID) {
+    public void setExtraFeatureID(int extraFeatureID) {
         this.extraFeatureID = extraFeatureID;
     }
 
