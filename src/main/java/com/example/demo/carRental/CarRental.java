@@ -25,9 +25,11 @@ public class CarRental {
     
 
     @OneToOne
+    @JoinColumn(name = "car_id")
     private Car car;
    
     @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
     
     
@@ -35,7 +37,7 @@ public class CarRental {
 
     }
 
-    private CarRental(Date rentalStarDate, Date rentalEnDate, Status rentalStatus){
+    public CarRental(Date rentalStarDate, Date rentalEnDate, Status rentalStatus){
 
         this.rentalStartDate = rentalStarDate;
         this.rentalEndDate = rentalEndDate;
