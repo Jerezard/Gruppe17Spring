@@ -1,8 +1,10 @@
 package com.example.demo.car;
 
 import jakarta.persistence.*;
+import java.util.*;
 
 @Entity
+@Table(name = "cars", uniqueConstraints = @UniqueConstraint(columnNames = "registration_Number"))
 public class Car {
     
     @Id
@@ -27,17 +29,13 @@ public class Car {
     @Column(name = "availability_Status")
     private boolean availabilityStatus;
 
-    // @OneToMany
-    // @JoinTable(
-    //     name = "car_extra_features",
-    //     joinColumns = @JoinColumn(name = "car_id"),
-    //     inverseJoinColumns = @JoinColumn(name = "extra_feature_id")
-    // )
-    // private Set<ExtraFeatures> extraFeatures;
 
-    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Price> prices;
+
+
+    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private ExtraFeatures extraFeatures;
-
 
     public Car(){
 
@@ -144,6 +142,15 @@ public class Car {
 
     public void setExtraFeatures(ExtraFeatures extraFeatures) {
         this.extraFeatures = extraFeatures;
+    }
+
+    
+    public List<Price> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(List<Price> prices) {
+        this.prices = prices;
     }
 
 }
