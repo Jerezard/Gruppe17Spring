@@ -2,6 +2,7 @@ package com.example.demo.user;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User {
     
     @Id
@@ -19,7 +20,7 @@ public class User {
 
     }
 
-    private User(String firstName, String lastName, String email, String phoneNumber, boolean isAdmin){
+    public User(String firstName, String lastName, String email, String phoneNumber, boolean isAdmin){
 
         this.firstName = firstName;
         this.lastName = lastName;
