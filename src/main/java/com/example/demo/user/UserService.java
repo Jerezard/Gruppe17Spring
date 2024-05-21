@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Exception.DuplicateUserException;
+import com.example.demo.Exception.UserAlreadyExists;
+
 @Service
 public class UserService {
     
@@ -13,8 +16,18 @@ public class UserService {
     private UserRepository userRepository;
 
     public User createUser(UserDto userDto){
-        User user = new User(userDto.getFirstName(), userDto.getLastName(), userDto.getEmail(), 
-        userDto.getPhoneNumber(), userDto.isAdmin());
+        Optional<User> existingUser = userRepository.findById(userDto.getUserID());
+        if(existingUser.isPresent()){
+            throw new DuplicateUserException("A user with the id " + userDto.getUserID() + " already exists.");
+        }
+        if(userRepository.existsByEmail(userDto.getEmail())){
+            throw new UserAlreadyExists("A user with this email already exists");
+        }
+        if(userRepository.existsByPhoneNumber(userDto.getPhoneNumber())){
+            throw new UserAlreadyExists("A user with this phone number already exists");
+        }
+
+        User user = convertToEntity(userDto);
         return userRepository.save(user);
     }
 
@@ -24,5 +37,11 @@ public class UserService {
 
     public Optional<User> getUserById(int userID){
         return userRepository.findById(userID);
+    }
+
+    private User convertToEntity(UserDto userDto){
+        User user = new User(userDto.getFirstName(), userDto.getLastName(), userDto.getEmail(), 
+        userDto.getPhoneNumber(), userDto.isAdmin());
+        return user;
     }
 }
