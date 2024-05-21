@@ -13,6 +13,7 @@ public class UserDto {
     @NotEmpty
     private String phoneNumber;
     private boolean isAdmin;
+    private int userID;
 
     public String getFirstName() {
         return firstName;
@@ -53,5 +54,15 @@ public class UserDto {
     public void setAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    
 }
 
