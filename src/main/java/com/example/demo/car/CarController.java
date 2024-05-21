@@ -3,6 +3,7 @@ package com.example.demo.car;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +51,18 @@ public class CarController {
     public ResponseEntity<Double> getTotalRentalPrice(@PathVariable int id, @RequestParam int days){
         Optional<Double> totalPrice = carService.calculateTotalRentalPrice(id, days);
         return totalPrice.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/sortLowPrice")
+    public ResponseEntity<List<CarDto>> getAllCarsSortedByLowestPrice(){
+        List<CarDto> cars = carService.getAllCarsSortByLowestPrice();
+        return ResponseEntity.ok(cars);
+    }
+
+    @GetMapping("/sortHighPrice")
+    public ResponseEntity<List<CarDto>> getAllCarsSortedByHighestPrice(){
+        List<CarDto> cars = carService.getAllCarsSortByHighestPrice();
+        return ResponseEntity.ok(cars);
     }
 
 }
