@@ -14,9 +14,7 @@ public class CarRentalDto {
     private Date rentalEndDate;
     private Status rentalStatus;
     private CarDto car;
-    private int carId;
     private UserDto user;
-    private int userId;
 
 
 
@@ -38,18 +36,7 @@ public class CarRentalDto {
     public void setRentalStatus(Status rentalStatus) {
         this.rentalStatus = rentalStatus;
     }
-    public int getCarId() {
-        return carId;
-    }
-    public void setCarId(int carId) {
-        this.carId = carId;
-    }
-    public int getUserId() {
-        return userId;
-    }
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+
     public CarDto getCar() {
         return car;
     }
