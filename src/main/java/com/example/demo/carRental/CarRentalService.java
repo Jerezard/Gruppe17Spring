@@ -9,10 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Exception.DuplicateCarRentalException;
 import com.example.demo.car.Car;
-import com.example.demo.car.CarDto;
 import com.example.demo.car.CarRepository;
 import com.example.demo.car.CarService;
-import com.example.demo.car.PriceDto;
 import com.example.demo.user.User;
 import com.example.demo.user.UserDto;
 import com.example.demo.user.UserRepository;
