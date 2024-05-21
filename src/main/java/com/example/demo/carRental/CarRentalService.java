@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Exception.DuplicateCarRentalException;
 import com.example.demo.car.Car;
 import com.example.demo.car.CarDto;
 import com.example.demo.car.CarRepository;
@@ -31,24 +32,39 @@ public class CarRentalService {
     @Autowired
     private CarService carService;
 
-    public CarRental createCarRental(CarRentalDto CarRentalDto){
-        CarRental carRental = new CarRental();
-        carRental.setRentalStartDate(CarRentalDto.getRentalStartDate());
-        carRental.setRentalEndDate(CarRentalDto.getRentalEndDate());
-        carRental.setRentalStatus(CarRentalDto.getRentalStatus());
+    public CarRental createCarRental(CarRentalDto carRentalDto){
+        Optional<CarRental> existingRental = carRentalRepository.findByCar_CarIDAndUser_UserIDAndRentalStatus(
+            carRentalDto.getCar().getCarID(),
+            carRentalDto.getUser().getUserID(),
+            CarRental.Status.ONGOING
+            );
 
-        Optional<Car> car = carRepository.findById(CarRentalDto.getCarId());
-        Optional<User> user = userRepository.findById(CarRentalDto.getUserId());
+            if(existingRental.isPresent()){
+                throw new DuplicateCarRentalException("That Car rental already exists");
+            }
 
-        if((car.isPresent() && user.isPresent())){
-            carRental.setCar(car.get());
-            carRental.setUser(user.get());
-        } else {
-            throw new IllegalArgumentException("Invalid car or user ID");
+            CarRental carRental = convertToEntity(carRentalDto);
+            return carRentalRepository.save(carRental);
+
+    }
+
+
+    public CarRental updateCarRentalStatus(int rentalId, String status){
+        CarRental carRental = carRentalRepository.findById(rentalId).orElseThrow(() 
+        -> new IllegalArgumentException("Invalid CarRental ID"));
+        
+        CarRental.Status newStatus = CarRental.Status.valueOf(status);
+        carRental.setRentalStatus(newStatus);
+
+        Car car = carRental.getCar();
+        if(newStatus == CarRental.Status.COMPLETED || newStatus == CarRental.Status.CANCELED){
+            car.setAvailabilityStatus(true);
+        } else if (newStatus == CarRental.Status.ONGOING){
+            car.setAvailabilityStatus(false);
         }
+        carRepository.save(car);
 
         return carRentalRepository.save(carRental);
-
     }
 
     public List<CarRentalDto> getAllRentals(){
@@ -84,5 +100,23 @@ public class CarRentalService {
         userDto.setPhoneNumber(user.getPhoneNumber());
         userDto.setAdmin(user.isAdmin());
         return userDto;
+    }
+
+    private CarRental convertToEntity(CarRentalDto carRentalDto){
+
+        
+        CarRental carRental = new CarRental();
+        carRental.setRentalStartDate(carRentalDto.getRentalStartDate());
+        carRental.setRentalEndDate(carRentalDto.getRentalEndDate());
+        carRental.setRentalStatus(carRentalDto.getRentalStatus());
+
+        Car car = carRepository.findById(carRentalDto.getCar().getCarID()).orElseThrow(() -> new IllegalArgumentException("Invalid car ID"));
+        User user = userRepository.findById(carRentalDto.getUser().getUserID()).orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+        
+        carRental.setCar(car);
+        carRental.setUser(user);
+
+        return carRental;
+
     }
 }
