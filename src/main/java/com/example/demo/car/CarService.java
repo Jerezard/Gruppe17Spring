@@ -49,7 +49,17 @@ public class CarService {
         return Optional.empty();
     }
 
-    private CarDto convertToDto(Car car){
+    public List<CarDto> getAllCarsSortByLowestPrice(){
+        List<Car> cars = carRepository.findAllCarsOrderedByLowestPrice();
+        return cars.stream().map(this::convertToDto).collect(Collectors.toList());
+    }
+
+    public List<CarDto> getAllCarsSortByHighestPrice(){
+        List<Car> cars = carRepository.findAllCarsOrderedByHighestPrice();
+        return cars.stream().map(this::convertToDto).collect(Collectors.toList());
+    }
+
+    public CarDto convertToDto(Car car){
 
         CarDto carDto = new CarDto();
         carDto.setCarID(car.getCarID());
