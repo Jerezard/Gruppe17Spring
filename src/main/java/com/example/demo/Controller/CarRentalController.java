@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,13 +38,17 @@ public class CarRentalController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
         }
     }
-
-    @PostMapping("/{id}/status")
-    public ResponseEntity<CarRental> updateCarRentalStatus(@PathVariable int id,@RequestParam String status){
-        CarRental carRental = carRentalService.updateCarRentalStatus(id, status);
-        return ResponseEntity.ok(carRental);
+    
+    @PutMapping("/{id}/status")
+    public ResponseEntity<CarRentalDto> updateCarRentalStatus(@PathVariable int id,@RequestParam CarRental.Status status){
+        List<CarRentalDto> updatedCarRental = carRentalService.updateCarRentalStatus(id, status);
+        
+        if(!updatedCarRental.isEmpty()){
+            return ResponseEntity.ok(updatedCarRental.get(0));
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
-
     @GetMapping
     public ResponseEntity<List<CarRentalDto>> getAllRentals(){
         List<CarRentalDto> carRental = carRentalService.getAllRentals();
