@@ -1,4 +1,4 @@
-package com.example.demo.car;
+package com.example.demo.Dto;
 
 import java.util.List;
 
@@ -15,6 +15,7 @@ public class CarDto {
     private String registrationNumber;
     private boolean availabilityStatus;
     private List<PriceDto> prices;
+    private String imagePath;
 
     public int getCarID() {
         return carID;
@@ -103,5 +104,15 @@ public class CarDto {
     public void setPrices(List<PriceDto> prices) {
         this.prices = prices;
     }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    
 
 }

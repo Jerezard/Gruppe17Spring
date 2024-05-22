@@ -1,10 +1,8 @@
-package com.example.demo.carRental;
+package com.example.demo.Dto;
 
 import java.sql.Date;
 
-import com.example.demo.car.CarDto;
-import com.example.demo.carRental.CarRental.Status;
-import com.example.demo.user.UserDto;
+import com.example.demo.Entity.CarRental.Status;
 
 
 public class CarRentalDto {

@@ -1,4 +1,4 @@
-package com.example.demo.carRental;
+package com.example.demo.Controller;
 
 import java.util.List;
 
@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.Dto.CarRentalDto;
+import com.example.demo.Entity.CarRental;
+import com.example.demo.Service.CarRentalService;
 
 @RestController
 @RequestMapping("/car-rentals")

@@ -1,4 +1,4 @@
-package com.example.demo.carRental;
+package com.example.demo.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,13 +7,15 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Dto.CarRentalDto;
+import com.example.demo.Dto.UserDto;
+import com.example.demo.Entity.Car;
+import com.example.demo.Entity.CarRental;
+import com.example.demo.Entity.User;
 import com.example.demo.Exception.DuplicateCarRentalException;
-import com.example.demo.car.Car;
-import com.example.demo.car.CarRepository;
-import com.example.demo.car.CarService;
-import com.example.demo.user.User;
-import com.example.demo.user.UserDto;
-import com.example.demo.user.UserRepository;
+import com.example.demo.Repository.CarRentalRepository;
+import com.example.demo.Repository.CarRepository;
+import com.example.demo.Repository.UserRepository;
 
 @Service
 public class CarRentalService {

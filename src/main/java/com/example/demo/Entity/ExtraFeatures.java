@@ -1,4 +1,4 @@
-package com.example.demo.car;
+package com.example.demo.Entity;
 
 import jakarta.persistence.*;
 

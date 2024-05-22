@@ -1,7 +1,9 @@
-package com.example.demo.car;
+package com.example.demo.Entity;
 
 import jakarta.persistence.*;
 import java.util.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "cars", uniqueConstraints = @UniqueConstraint(columnNames = "registration_Number"))
@@ -28,6 +30,7 @@ public class Car {
     private String registrationNumber;
     @Column(name = "availability_Status")
     private boolean availabilityStatus;
+    private String imagePath;
 
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -37,11 +40,15 @@ public class Car {
     @OneToOne(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private ExtraFeatures extraFeatures;
 
+    @OneToMany(mappedBy = "car")
+    @JsonBackReference
+    private List<CarRental> carRentals;
+
     public Car(){
 
     }
 
-    private Car(int carID, String make, String model, String year, String color, String registrationNumber,
+    Car(int carID, String make, String model, String year, String color, String registrationNumber,
      boolean availabilityStatus, String fuelType, String transmissionType, int numSeats){
 
         this.carID = carID;
@@ -61,7 +68,6 @@ public class Car {
     public int getCarID() {
         return carID;
     }
-
     public String getMake() {
         return make;
     }
@@ -98,9 +104,12 @@ public class Car {
         return numSeats;
     }
 
-    // Setters
     public void setMake(String make) {
         this.make = make;
+    }
+
+    public void setCarID(int carID) {
+        this.carID = carID;
     }
 
     public void setModel(String model) {
@@ -153,5 +162,14 @@ public class Car {
         this.prices = prices;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    
 }
 

@@ -1,4 +1,4 @@
-package com.example.demo.user;
+package com.example.demo.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Dto.UserDto;
+import com.example.demo.Entity.User;
 import com.example.demo.Exception.DuplicateUserException;
 import com.example.demo.Exception.UserAlreadyExists;
+import com.example.demo.Repository.UserRepository;
 
 @Service
 public class UserService {

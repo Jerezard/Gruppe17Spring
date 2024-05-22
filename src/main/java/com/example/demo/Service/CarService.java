@@ -1,11 +1,26 @@
-package com.example.demo.car;
+package com.example.demo.Service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.Dto.CarDto;
+import com.example.demo.Dto.PriceDto;
+import com.example.demo.Entity.Car;
+import com.example.demo.Entity.Price;
+import com.example.demo.Repository.CarRepository;
+
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 
 @Service
 public class CarService {
@@ -58,6 +73,40 @@ public class CarService {
         List<Car> cars = carRepository.findAllCarsOrderedByHighestPrice();
         return cars.stream().map(this::convertToDto).collect(Collectors.toList());
     }
+
+    public List<CarDto> searchCars(String make, String model, String year, BigDecimal minPrice, BigDecimal maxPrice, Boolean availabilityStatus){
+        List<Car> cars = carRepository.findAll(new Specification<Car>(){
+            @Override
+            public Predicate toPredicate(Root<Car> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder){
+                List<Predicate> predicates = new ArrayList<>();
+                if(make != null && !make.isEmpty()){
+                    predicates.add(criteriaBuilder.equal(root.get("make"), make));
+                }
+                if(model != null && !model.isEmpty()){
+                    predicates.add(criteriaBuilder.equal(root.get("model"), model));
+                }
+                if(year != null){
+                    predicates.add(criteriaBuilder.equal(root.get("year"), year));
+                }
+                if (minPrice != null) {
+                    Join<Car, Price> prices = root.join("prices");
+                    predicates.add(criteriaBuilder.greaterThanOrEqualTo(prices.get("amount"), minPrice));
+                }
+                if (maxPrice != null) {
+                    Join<Car, Price> prices = root.join("prices");
+                    predicates.add(criteriaBuilder.lessThanOrEqualTo(prices.get("amount"), maxPrice));
+                }
+                if (availabilityStatus != null) {
+                    predicates.add(criteriaBuilder.equal(root.get("availabilityStatus"), availabilityStatus));
+                }
+
+                return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+            }
+        });
+
+        return cars.stream().map(this::convertToDto).collect(Collectors.toList());
+    }
+
 
     public CarDto convertToDto(Car car){
 

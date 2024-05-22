@@ -50,8 +50,21 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-maven-plugin</artifactId>
+    			<executions>
+        			<execution>
+            			<goals>
+                			<goal>repackage</goal>
+            			</goals>
+            			<configuration>
+                			<classifier>spring-boot</classifier>
+                			<mainClass>
+                  				com.example.demo.SpringGroup17Application
+                			</mainClass>
+            			</configuration>
+       	 			</execution>
+    			</executions>
 			</plugin>
 		</plugins>
 	</build>

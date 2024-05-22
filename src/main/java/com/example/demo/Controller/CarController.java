@@ -1,9 +1,9 @@
-package com.example.demo.car;
+package com.example.demo.Controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.Dto.CarDto;
+import com.example.demo.Dto.PriceDto;
+import com.example.demo.Service.CarService;
 
 @RestController
 @RequestMapping("/cars")
@@ -64,5 +68,19 @@ public class CarController {
         List<CarDto> cars = carService.getAllCarsSortByHighestPrice();
         return ResponseEntity.ok(cars);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<CarDto>> searchCars(
+        @RequestParam(required = false) String make,
+        @RequestParam(required = false) String model,
+        @RequestParam(required = false) String year,
+        @RequestParam(required = false) BigDecimal minPrice,
+        @RequestParam(required = false) BigDecimal maxPrice,
+        @RequestParam(required = false) Boolean availabilityStatus
+    ){
+        List<CarDto> cars = carService.searchCars(make,model,year,minPrice,maxPrice,availabilityStatus);
+        return ResponseEntity.ok(cars);
+    }
+
 
 }

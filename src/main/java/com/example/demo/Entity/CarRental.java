@@ -1,10 +1,7 @@
-package com.example.demo.carRental;
+package com.example.demo.Entity;
 
 import jakarta.persistence.*;
 import java.sql.Date;
-
-import com.example.demo.car.Car;
-import com.example.demo.user.User;
 
 @Entity
 public class CarRental {
