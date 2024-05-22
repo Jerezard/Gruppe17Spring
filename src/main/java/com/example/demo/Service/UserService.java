@@ -44,7 +44,7 @@ public class UserService {
 
     private User convertToEntity(UserDto userDto){
         User user = new User(userDto.getFirstName(), userDto.getLastName(), userDto.getEmail(), 
-        userDto.getPhoneNumber(), userDto.isAdmin());
+        userDto.getPhoneNumber(), userDto.getPassword() ,userDto.isAdmin());
         return user;
     }
 }

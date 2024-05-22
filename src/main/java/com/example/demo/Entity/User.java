@@ -17,18 +17,20 @@ public class User {
     @Column(nullable = false, unique = true)
     private String phoneNumber;
     private boolean isAdmin;
+    private String password;
 
     public User(){
 
     }
 
-    public User(String firstName, String lastName, String email, String phoneNumber, boolean isAdmin){
+    public User(String firstName, String lastName, String email, String phoneNumber, String password ,boolean isAdmin){
 
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.isAdmin = isAdmin;
+        this.password = password;
 
     }
 

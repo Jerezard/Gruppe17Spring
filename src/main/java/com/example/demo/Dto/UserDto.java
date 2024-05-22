@@ -14,6 +14,7 @@ public class UserDto {
     private String phoneNumber;
     private boolean isAdmin;
     private int userID;
+    private String password;
 
     public String getFirstName() {
         return firstName;
@@ -61,6 +62,14 @@ public class UserDto {
 
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     
