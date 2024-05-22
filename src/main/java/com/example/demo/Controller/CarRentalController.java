@@ -26,17 +26,9 @@ public class CarRentalController {
     private CarRentalService carRentalService;
 
     @PostMapping
-    public ResponseEntity<?> createCarRental(@RequestBody CarRentalDto carRentalDto){
-        if(carRentalDto.getCar() == null || carRentalDto.getUser() == null ){
-            return ResponseEntity.badRequest().body("Car and User must be provided");
-        }
-        
-        try{
-            CarRental carRental = carRentalService.createCarRental(carRentalDto);
-            return ResponseEntity.ok(carRental);
-        } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
-        }
+    public ResponseEntity<CarRental> createCarRental(@RequestBody CarRentalDto carRentalDto){
+        CarRental carRental = carRentalService.createCarRental(carRentalDto);
+        return ResponseEntity.ok(carRental);
     }
     
     @PutMapping("/{id}/status")
@@ -49,6 +41,7 @@ public class CarRentalController {
             return ResponseEntity.notFound().build();
         }
     }
+
     @GetMapping
     public ResponseEntity<List<CarRentalDto>> getAllRentals(){
         List<CarRentalDto> carRental = carRentalService.getAllRentals();

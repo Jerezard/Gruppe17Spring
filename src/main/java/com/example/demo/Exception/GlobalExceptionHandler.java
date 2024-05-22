@@ -45,4 +45,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body("A user with this email or phone number already exists.");
     }
+
+    @ExceptionHandler(NullValueExpeption.class)
+    public ResponseEntity<String> handleNullValueException(NullValueExpeption ex){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
 }
