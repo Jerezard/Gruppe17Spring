@@ -19,9 +19,8 @@ public class ExtraFeatures {
 
     }
     
-    public ExtraFeatures(int extraFeatureID, String extraFeature) {
+    public ExtraFeatures(String extraFeature) {
 
-        this.extraFeatureID = extraFeatureID;
         this.extraFeature = extraFeature;
 
     }

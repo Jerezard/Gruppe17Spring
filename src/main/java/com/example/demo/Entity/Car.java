@@ -38,7 +38,7 @@ public class Car {
 
 
     @OneToOne(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ExtraFeatures extraFeatures;
+    private List<ExtraFeatures> extraFeatures;
 
     @OneToMany(mappedBy = "car")
     @JsonBackReference
@@ -145,11 +145,11 @@ public class Car {
         this.availabilityStatus = availabilityStatus;
     }
 
-    public ExtraFeatures getExtraFeatures() {
+    public List<ExtraFeatures> getExtraFeatures() {
         return extraFeatures;
     }
 
-    public void setExtraFeatures(ExtraFeatures extraFeatures) {
+    public void setExtraFeatures(List<ExtraFeatures> extraFeatures) {
         this.extraFeatures = extraFeatures;
     }
 
