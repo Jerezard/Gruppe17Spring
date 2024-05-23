@@ -34,6 +34,8 @@ public class User {
 
     }
 
+    
+
     public int getUserID() {
         return userID;
     }
@@ -80,5 +82,13 @@ public class User {
 
     public void setAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
