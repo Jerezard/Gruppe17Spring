@@ -1,0 +1,359 @@
+{
+	"info": {
+		"_postman_id": "0be1e78c-c510-46e6-a8ff-96b086a73ea7",
+		"name": "Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33691304"
+	},
+	"item": [
+		{
+			"name": "New Folder",
+			"item": [
+				{
+					"name": "Get Rental price for Carid Y for X days",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://129.241.153.91/api/cars/1/total-price?days=7",
+							"protocol": "http",
+							"host": [
+								"129",
+								"241",
+								"153",
+								"91"
+							],
+							"path": [
+								"api",
+								"cars",
+								"1",
+								"total-price"
+							],
+							"query": [
+								{
+									"key": "days",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get car by CarId X",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://129.241.153.91/api/cars/2",
+							"protocol": "http",
+							"host": [
+								"129",
+								"241",
+								"153",
+								"91"
+							],
+							"path": [
+								"api",
+								"cars",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"HELLO\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"john.SNO@example.com\",\r\n    \"password\": \"hellosmello\",\r\n    \"phoneNumber\": \"123456550\",\r\n    \"isAdmin\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://129.241.153.91/api/users",
+							"protocol": "http",
+							"host": [
+								"129",
+								"241",
+								"153",
+								"91"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get cars by availabilityStatus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://129.241.153.91/api/cars/availability/true",
+							"protocol": "http",
+							"host": [
+								"129",
+								"241",
+								"153",
+								"91"
+							],
+							"path": [
+								"api",
+								"cars",
+								"availability",
+								"true"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change CarRental Status by CarRental id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://129.241.153.91/api/car-rentals/1/status?status=COMPLETED",
+							"protocol": "http",
+							"host": [
+								"129",
+								"241",
+								"153",
+								"91"
+							],
+							"path": [
+								"api",
+								"car-rentals",
+								"1",
+								"status"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "COMPLETED"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post New CarRental",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rentalStartDate\": \"2024-05-20\",\r\n    \"rentalEndDate\": \"2024-05-31\",\r\n    \"rentalStatus\": \"ONGOING\",\r\n    \"car\": {\r\n        \"carID\": 2\r\n    },\r\n    \"user\": {\r\n        \"userID\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://129.241.153.91/api/car-rentals",
+							"protocol": "http",
+							"host": [
+								"129",
+								"241",
+								"153",
+								"91"
+							],
+							"path": [
+								"api",
+								"car-rentals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Car Rentals",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://129.241.153.91/api/car-rentals",
+							"protocol": "http",
+							"host": [
+								"129",
+								"241",
+								"153",
+								"91"
+							],
+							"path": [
+								"api",
+								"car-rentals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Multiple search request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://129.241.153.91/api/cars/search?make=Volkswagen&availabilityStatus=true&maxPrice=400",
+							"protocol": "http",
+							"host": [
+								"129",
+								"241",
+								"153",
+								"91"
+							],
+							"path": [
+								"api",
+								"cars",
+								"search"
+							],
+							"query": [
+								{
+									"key": "make",
+									"value": "Volkswagen"
+								},
+								{
+									"key": "availabilityStatus",
+									"value": "true"
+								},
+								{
+									"key": "maxPrice",
+									"value": "400"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://129.241.153.91/api/users",
+							"protocol": "http",
+							"host": [
+								"129",
+								"241",
+								"153",
+								"91"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sort cars by highest price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://129.241.153.91/api/cars/sortHighPrice",
+							"protocol": "http",
+							"host": [
+								"129",
+								"241",
+								"153",
+								"91"
+							],
+							"path": [
+								"api",
+								"cars",
+								"sortHighPrice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get image by carID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://129.241.153.91/api/api/images/car/2",
+							"protocol": "http",
+							"host": [
+								"129",
+								"241",
+								"153",
+								"91"
+							],
+							"path": [
+								"api",
+								"api",
+								"images",
+								"car",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sort cars by low price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://129.241.153.91/api/cars/sortLowPrice",
+							"protocol": "http",
+							"host": [
+								"129",
+								"241",
+								"153",
+								"91"
+							],
+							"path": [
+								"api",
+								"cars",
+								"sortLowPrice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://129.241.153.91/api/users/2",
+							"protocol": "http",
+							"host": [
+								"129",
+								"241",
+								"153",
+								"91"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
