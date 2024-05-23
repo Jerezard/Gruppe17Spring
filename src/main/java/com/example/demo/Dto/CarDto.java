@@ -15,7 +15,7 @@ public class CarDto {
     private String registrationNumber;
     private boolean availabilityStatus;
     private List<PriceDto> prices;
-    private ExtraFeaturesDto extraFeatures;
+    // private ExtraFeaturesDto extraFeatures;
     private String imagePath;
 
     public int getCarID() {
@@ -114,13 +114,13 @@ public class CarDto {
         this.imagePath = imagePath;
     }
 
-    public ExtraFeaturesDto getExtraFeatures() {
-        return extraFeatures;
-    }
+    // public ExtraFeaturesDto getExtraFeatures() {
+    //     return extraFeatures;
+    // }
 
-    public void setExtraFeatures(ExtraFeaturesDto extraFeatures) {
-        this.extraFeatures = extraFeatures;
-    }
+    // public void setExtraFeatures(ExtraFeaturesDto extraFeatures) {
+    //     this.extraFeatures = extraFeatures;
+    // }
 
     
 
