@@ -131,7 +131,7 @@ public class CarService {
         }
 
         if(car.getExtraFeatures() != null){
-            List<ExtraFeaturesDto> extraFeaturesDto = car.getExtraFeatures().stream().map(this::convertToExtraFeaturesDto).collect(Collectors.toList());
+            ExtraFeaturesDto extraFeaturesDto = convertToExtraFeaturesDto(car.getExtraFeatures());
             carDto.setExtraFeatures(extraFeaturesDto);
         }
             
