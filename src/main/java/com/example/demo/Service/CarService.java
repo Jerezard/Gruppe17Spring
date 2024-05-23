@@ -11,8 +11,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Dto.CarDto;
+import com.example.demo.Dto.ExtraFeaturesDto;
 import com.example.demo.Dto.PriceDto;
 import com.example.demo.Entity.Car;
+import com.example.demo.Entity.ExtraFeatures;
 import com.example.demo.Entity.Price;
 import com.example.demo.Repository.CarRepository;
 
@@ -125,7 +127,13 @@ public class CarService {
         if(car.getPrices() != null){
             List<PriceDto> priceDto = car.getPrices().stream().map(this::convertToPriceDto).collect(Collectors.toList());
             carDto.setPrices(priceDto);
-      }
+        }
+
+        if(car.getExtraFeatures() != null){
+            ExtraFeaturesDto extraFeaturesDto = convertToExtraFeaturesDto(car.getExtraFeatures());
+            carDto.setExtraFeature(extraFeaturesDto);
+        }
+            
 
       return carDto;
 
@@ -137,6 +145,13 @@ public class CarService {
         priceDto.setDescription(price.getDescription());
         priceDto.setAmount(price.getAmount());
         return priceDto;
+    }
+
+    private ExtraFeaturesDto convertToExtraFeaturesDto(ExtraFeatures extraFeatures){
+        ExtraFeaturesDto extraFeaturesDto = new ExtraFeaturesDto();
+        extraFeaturesDto.setExtraFeature(extraFeatures.getExtraFeature());
+        extraFeaturesDto.setExtraFeatureID(extraFeatures.getExtraFeatureID());
+        return extraFeaturesDto;
     }
 
 
