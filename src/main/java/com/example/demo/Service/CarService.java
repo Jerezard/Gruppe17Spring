@@ -131,7 +131,7 @@ public class CarService {
 
         if(car.getExtraFeatures() != null){
             ExtraFeaturesDto extraFeaturesDto = convertToExtraFeaturesDto(car.getExtraFeatures());
-            carDto.setExtraFeature(extraFeaturesDto);
+            carDto.setExtraFeatures(extraFeaturesDto);
         }
             
 
